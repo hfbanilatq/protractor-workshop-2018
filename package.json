@@ -1,0 +1,35 @@
+{
+  "name": "protractor-workshop-2018",
+  "version": "1.0.0",
+  "description": "Taller sobre protractor testing",
+  "main": "index.js",
+  "scripts": {
+    "clean": " npm rm -rf dist",
+    "build": "npm run clean && tsc",
+    "test": "npm run build && protractor dist/protractor/local.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hfbanilatq/protractor-workshop-2018.git"
+  },
+  "keywords": [
+    "ui-testing",
+    "dojo",
+    "practice",
+    "protractor"
+  ],
+  "author": "Hector banilat <hfbanilatq@gmail.com> (hfbanilatq)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hfbanilatq/protractor-workshop-2018/issues"
+  },
+  "homepage": "https://github.com/hfbanilatq/protractor-workshop-2018#readme",
+  "dependencies": {
+    "protractor": "^5.4.2"
+  },
+  "devDependencies": {
+    "@types/jasminewd2": "^2.0.6",
+    "@types/node": "^12.6.8",
+    "typescript": "^3.5.3"
+  }
+}
