@@ -4,18 +4,19 @@ export class SingInPage{
   private fieldEmail: ElementFinder;
   private fieldPasswd: ElementFinder;
   private buttonSubmit: ElementFinder;
+
   constructor() {
     this.fieldEmail = $('#email');
     this.fieldPasswd = $('#passwd');
     this.buttonSubmit = $('#SubmitLogin > span');
   }
-  public async writeEmail() {
+  public async writeEmail() :Promise<void> {
     await this.fieldEmail.sendKeys('aperdomobo@gmail.com');
   }
-  public async writePassword() {
+  public async writePassword(): Promise<void> {
     await this.fieldPasswd.sendKeys('WorkshopProtractor');
   }
-  public async submit() {
+  public async submit() : Promise<void> {
     await this.buttonSubmit.click();
   }
 }
