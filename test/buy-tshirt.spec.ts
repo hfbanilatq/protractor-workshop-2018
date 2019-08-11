@@ -32,10 +32,10 @@ describe('Buy a t-shirt', () => {
     await(browser.sleep(3000));
     await singInPage.writeEmail();
     await singInPage.writePassword();
-    await singInPage.goToAddressPage();
+    await singInPage.submit();
     await(browser.sleep(3000));
 
-    await addressStepPage.goToshippingPage();
+    await addressStepPage.goToShippingPage();
     await(browser.sleep(3000));
 
     await shippingStepPage.clickAcceptTerms();
@@ -48,7 +48,7 @@ describe('Buy a t-shirt', () => {
     await bankPaymentPage.comfirmOrder();
     await(browser.sleep(3000));
 
-    await expect(orderSumaryPage.getResult())
+    await expect(orderSumaryPage.getResultOrder())
       .toBe('Your order on My Store is complete.');
   });
 });

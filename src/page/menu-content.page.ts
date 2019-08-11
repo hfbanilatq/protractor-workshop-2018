@@ -1,4 +1,5 @@
 import { $, ElementFinder } from 'protractor';
+
 export class MenuContentPage{
   private tShirtMenu: ElementFinder;
   constructor() {

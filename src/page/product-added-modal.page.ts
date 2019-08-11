@@ -1,11 +1,11 @@
 import { $, ElementFinder } from 'protractor';
 
 export class ProductAddedModalPage{
-  private buttonCheckout: ElementFinder;
+  private buttonCheckoutProductAdded: ElementFinder;
   constructor() {
-    this.buttonCheckout = $('[style*="display: block;"] .button-container > a');
+    this.buttonCheckoutProductAdded = $('[style*="display: block;"] .button-container > a');
   }
   public async goToSumaryPage() {
-    await this.buttonCheckout.click();
+    await this.buttonCheckoutProductAdded.click();
   }
 }
