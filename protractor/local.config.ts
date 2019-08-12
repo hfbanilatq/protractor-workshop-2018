@@ -8,5 +8,8 @@ export const config: Config = {
     browser.ignoreSynchronization = true;
     reporter();
   },
-  getPageTimeout: 1000
+  getPageTimeout: 3000,
+  jasmineNodeOpts: {
+    defaultTimeoutInterval: 12000
+  }
 };
