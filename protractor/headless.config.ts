@@ -14,5 +14,8 @@ export const config: Config = {
       args: ['--headless', '--disable-gpu']
     }
   },
-  getPageTimeout: 1000
+  getPageTimeout: 3000,
+  jasmineNodeOpts: {
+    defaultTimeoutInterval: 120000
+  }
 };
