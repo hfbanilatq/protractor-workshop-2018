@@ -1,6 +1,6 @@
 import { $, ElementFinder } from 'protractor';
 
-export class SingInPage{
+export class SignInPage{
   private fieldEmail: ElementFinder;
   private fieldPasswd: ElementFinder;
   private buttonSubmit: ElementFinder;

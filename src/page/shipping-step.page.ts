@@ -11,7 +11,7 @@ export class ShippingStepPage{
   public async clickAcceptTerms() : Promise<void> {
     await this.boxAcceptTerms.click();
   }
-  public async goToPaymentPage() {
+  public async goToPaymentPage() :Promise<void> {
     await this.buttonCheckoutShippingStep.click();
   }
 }

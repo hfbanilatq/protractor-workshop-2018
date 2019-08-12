@@ -1,12 +1,12 @@
 import { $, ElementFinder } from 'protractor';
 
-export class SumaryStepPage{
+export class SummaryStepPage{
   private buttonProceedToCheckout: ElementFinder;
 
   constructor () {
     this.buttonProceedToCheckout = $('.cart_navigation span');
   }
-  public async goToSingIn() : Promise<void> {
+  public async goToSignIn() : Promise<void> {
     await this.buttonProceedToCheckout.click();
   }
 }

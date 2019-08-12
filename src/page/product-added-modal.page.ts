@@ -6,7 +6,7 @@ export class ProductAddedModalPage{
   constructor() {
     this.buttonCheckoutProductAdded = $('[style*="display: block;"] .button-container > a');
   }
-  public async goToSumaryPage() : Promise<void> {
+  public async goToSummaryPage() : Promise<void> {
     await this.buttonCheckoutProductAdded.click();
   }
 }

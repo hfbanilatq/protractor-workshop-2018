@@ -1,8 +1,8 @@
 export { MenuContentPage } from './menu-content.page';
 export { ProductListPage } from './product-list.page';
 export { ProductAddedModalPage } from  './product-added-modal.page';
-export { SumaryStepPage } from './sumary-step.page';
-export { SingInPage } from './sign-in-step.page';
+export { SummaryStepPage } from './summary-step.page';
+export { SignInPage } from './sign-in-step.page';
 export { AddressStepPage } from './address-step.page';
 export { ShippingStepPage } from './shipping-step.page';
 export { PaymentStepPage } from './payment-step.page';

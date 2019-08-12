@@ -1,15 +1,15 @@
 import { browser } from 'protractor';
 import { MenuContentPage, AddressStepPage, ProductListPage,
-  OrderSumaryPage, ProductAddedModalPage, SingInPage, ShippingStepPage,
-  PaymentStepPage, BankPaymentPage, SumaryStepPage
+  OrderSumaryPage, ProductAddedModalPage, SignInPage, ShippingStepPage,
+  PaymentStepPage, BankPaymentPage, SummaryStepPage
  } from '../src/page';
 
 describe('Buy a t-shirt', () => {
   const menuContentPage: MenuContentPage = new MenuContentPage;
   const productListPage: ProductListPage = new ProductListPage;
   const productAddedModalPage: ProductAddedModalPage = new ProductAddedModalPage;
-  const sumaryStepPage: SumaryStepPage = new SumaryStepPage;
-  const singInPage: SingInPage = new SingInPage;
+  const sumaryStepPage: SummaryStepPage = new SummaryStepPage;
+  const singInPage: SignInPage = new SignInPage;
   const addressStepPage: AddressStepPage = new AddressStepPage;
   const shippingStepPage: ShippingStepPage = new ShippingStepPage;
   const paymentStepPage: PaymentStepPage = new PaymentStepPage;
@@ -26,9 +26,9 @@ describe('Buy a t-shirt', () => {
     await(browser.sleep(3000));
     await productListPage.goToProductAddeModal();
     await(browser.sleep(3000));
-    await productAddedModalPage.goToSumaryPage();
+    await productAddedModalPage.goToSummaryPage();
     await(browser.sleep(3000));
-    await sumaryStepPage.goToSingIn();
+    await sumaryStepPage.goToSignIn();
     await(browser.sleep(3000));
     await singInPage.writeEmail();
     await singInPage.writePassword();
