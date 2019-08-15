@@ -1,4 +1,4 @@
-import { $, ElementFinder } from 'protractor';
+import { $, ElementFinder, ExpectedConditions } from 'protractor';
 
 export class MenuContentPage{
   private tShirtMenu: ElementFinder;
@@ -8,5 +8,8 @@ export class MenuContentPage{
   }
   public async goToTShirtMenu (): Promise<void> {
     await this.tShirtMenu.click();
+  }
+  public isClickableTShirtMenu() : Function {
+    return ExpectedConditions.elementToBeClickable(this.tShirtMenu);
   }
 }
