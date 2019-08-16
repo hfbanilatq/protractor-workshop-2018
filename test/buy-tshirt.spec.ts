@@ -19,13 +19,10 @@ describe('Buy a t-shirt', () => {
   it('then should be bought a t-shirt', async () => {
     await browser.get('http://automationpractice.com/');
 
-    await browser.wait(menuContentPage.isClickableTShirtMenu(), 5000);
     await menuContentPage.goToTShirtMenu();
 
-    await browser.wait(productListPage.isClickableButtonAddToCart(), 5000);
     await productListPage.goToProductAddeModal();
 
-    await browser.wait(productAddedModalPage.isClickableButtonCheckout(), 5000);
     await productAddedModalPage.goToSummaryPage();
 
     await sumaryStepPage.goToSignIn();
