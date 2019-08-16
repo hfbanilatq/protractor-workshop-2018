@@ -1,4 +1,4 @@
-import { $, ElementFinder } from 'protractor';
+import { $, ElementFinder, ExpectedConditions, browser } from 'protractor';
 
 export class ProductListPage{
   private buttonAddToCart: ElementFinder;
@@ -7,6 +7,12 @@ export class ProductListPage{
     this.buttonAddToCart = $('#center_column a.button.ajax_add_to_cart_button.btn.btn-default');
   }
   public async goToProductAddeModal() : Promise<void> {
+    await this.waitToBeClickableButtonAddToCart();
     await this.buttonAddToCart.click();
+  }
+
+  public async waitToBeClickableButtonAddToCart() : Promise<void> {
+    await browser.wait(
+      ExpectedConditions.elementToBeClickable(this.buttonAddToCart), 3000);
   }
 }
