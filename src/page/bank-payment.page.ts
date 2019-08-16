@@ -4,7 +4,7 @@ export class BankPaymentPage{
   private buttonConfirmOrder: ElementFinder;
 
   constructor() {
-    this.buttonConfirmOrder = $('#cart_navigation > button > span');
+    this.buttonConfirmOrder = $('#center_column > form > #cart_navigation > button > span');
   }
   public async comfirmOrder(): Promise<void> {
     await this.buttonConfirmOrder.click();

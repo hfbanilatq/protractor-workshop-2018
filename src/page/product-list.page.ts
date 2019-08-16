@@ -4,7 +4,10 @@ export class ProductListPage{
   private buttonAddToCart: ElementFinder;
 
   constructor() {
-    this.buttonAddToCart = $('#center_column a.button.ajax_add_to_cart_button.btn.btn-default');
+    this.buttonAddToCart = $(
+      '#center_column > ul > li > div > .right-block > ' +
+      '.button-container > a.button.ajax_add_to_cart_button.btn.btn-default'
+      );
   }
   public async goToProductAddeModal() : Promise<void> {
     await this.waitToBeClickableButtonAddToCart();

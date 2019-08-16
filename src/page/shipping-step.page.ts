@@ -5,8 +5,10 @@ export class ShippingStepPage{
   private buttonCheckoutShippingStep: ElementFinder;
 
   constructor() {
-    this.boxAcceptTerms = $('#cgv ');
-    this.buttonCheckoutShippingStep = $('#form > p > button > span');
+    this.boxAcceptTerms = $(
+      '#form > div.order_carrier_content.box > p > #uniform-cgv > span > #cgv ');
+    this.buttonCheckoutShippingStep = $(
+      '#center_column > #carrier_area > #form > p > button > span');
   }
   public async clickAcceptTerms() : Promise<void> {
     await browser.wait(this.isToBeSelectedBoxAcceptTerms(), 2000);

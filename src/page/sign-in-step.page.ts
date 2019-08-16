@@ -6,9 +6,13 @@ export class SignInPage{
   private buttonSubmit: ElementFinder;
 
   constructor() {
-    this.fieldEmail = $('#email');
-    this.fieldPasswd = $('#passwd');
-    this.buttonSubmit = $('#SubmitLogin > span');
+    this.fieldEmail = $(
+      '#center_column > div > div:nth-child(2) > #login_form > div >div:nth-child(1)> #email');
+    this.fieldPasswd = $(
+      '#center_column > div > div:nth-child(2) > #login_form > div > div:nth-child(2)> span>#passwd'
+      );
+    this.buttonSubmit = $(
+      '#center_column > div > div:nth-child(2) > #login_form >div > p.submit > #SubmitLogin');
   }
   public async writeEmail() :Promise<void> {
     await this.fieldEmail.sendKeys('aperdomobo@gmail.com');

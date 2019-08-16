@@ -4,7 +4,8 @@ export class SummaryStepPage{
   private buttonProceedToCheckout: ElementFinder;
 
   constructor () {
-    this.buttonProceedToCheckout = $('.cart_navigation span');
+    this.buttonProceedToCheckout = $(
+      '#center_column> p.cart_navigation.clearfix> a.button.btn.btn-default');
   }
   public async goToSignIn() : Promise<void> {
     await this.waitToBeClickableButtonProceed();
