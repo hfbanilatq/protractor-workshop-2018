@@ -12,6 +12,6 @@ export class SummaryStepPage{
   }
   private async waitToBeClickableButtonProceed() : Promise<void> {
     await browser.wait(
-      ExpectedConditions.elementToBeClickable(this.buttonProceedToCheckout), 2000);
+      ExpectedConditions.elementToBeClickable(this.buttonProceedToCheckout), 3000);
   }
 }

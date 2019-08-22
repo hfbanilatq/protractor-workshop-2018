@@ -8,7 +8,7 @@ export class SignInPage{
   constructor() {
     this.fieldEmail = $('#email');
     this.fieldPasswd = $('#passwd');
-    this.buttonSubmit = $('#SubmitLogin > span');
+    this.buttonSubmit = $('#SubmitLogin');
   }
   public async writeEmail() :Promise<void> {
     await this.fieldEmail.sendKeys('aperdomobo@gmail.com');

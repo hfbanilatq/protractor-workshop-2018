@@ -1,10 +1,10 @@
-import { $, ElementFinder } from 'protractor';
+import { ElementFinder, element, by } from 'protractor';
 
 export class PaymentStepPage{
   private bankWire: ElementFinder;
 
   constructor() {
-    this.bankWire = $('#HOOK_PAYMENT > div:nth-child(1) > div > p > a');
+    this.bankWire = element(by.css('.payment_module > .bankwire'));
   }
   public async goToBankPaymentPage(): Promise<void> {
     await this.bankWire.click();

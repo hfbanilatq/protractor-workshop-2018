@@ -1,10 +1,10 @@
-import { $, ElementFinder, ExpectedConditions, browser } from 'protractor';
+import { ElementFinder, ExpectedConditions, browser, element, by } from 'protractor';
 
 export class ProductListPage{
   private buttonAddToCart: ElementFinder;
 
   constructor() {
-    this.buttonAddToCart = $('#center_column a.button.ajax_add_to_cart_button.btn.btn-default');
+    this.buttonAddToCart = element(by.css('[title="Add to cart"'));
   }
   public async goToProductAddeModal() : Promise<void> {
     await this.waitToBeClickableButtonAddToCart();
