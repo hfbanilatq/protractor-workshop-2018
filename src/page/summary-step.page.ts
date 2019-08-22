@@ -1,11 +1,10 @@
-import { $, ElementFinder, browser, ExpectedConditions } from 'protractor';
+import { ElementFinder, browser, ExpectedConditions, element, by } from 'protractor';
 
 export class SummaryStepPage{
   private buttonProceedToCheckout: ElementFinder;
 
   constructor () {
-    this.buttonProceedToCheckout = $(
-      '#center_column> p.cart_navigation.clearfix> a.button.btn.btn-default');
+    this.buttonProceedToCheckout = element(by.css('.cart_navigation .button'));
   }
   public async goToSignIn() : Promise<void> {
     await this.waitToBeClickableButtonProceed();

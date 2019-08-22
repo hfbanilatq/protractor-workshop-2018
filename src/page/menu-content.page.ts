@@ -4,7 +4,7 @@ export class MenuContentPage{
   private tShirtMenu: ElementFinder;
 
   constructor() {
-    this.tShirtMenu = $('#header .container > .row > #block_top_menu > ul >li:nth-child(3) >a');
+    this.tShirtMenu = $('ul.sf-menu > li > a[title="T-shirts"]');
   }
   public async goToTShirtMenu (): Promise<void> {
     await this.waitToBeClickableTShirtMenu();

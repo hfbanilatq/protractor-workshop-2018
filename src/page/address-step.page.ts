@@ -1,11 +1,12 @@
-import { $, ElementFinder, ExpectedConditions, browser } from 'protractor';
+import { ElementFinder, ExpectedConditions, browser, by, element } from 'protractor';
 
 export class AddressStepPage{
   private buttonCheckout: ElementFinder;
 
   constructor() {
-    this.buttonCheckout = $(
-      '#center_column > form > p.cart_navigation.clearfix > button > span');
+    this.buttonCheckout = element(
+         by.cssContainingText('button', 'Proceed to checkout')
+      );
   }
   public async goToShippingPage (): Promise<void> {
     await this.waitToClickableButtonCheckout();

@@ -1,11 +1,10 @@
-import { $, ElementFinder, ExpectedConditions, browser } from 'protractor';
+import {  ElementFinder, ExpectedConditions, browser, element, by } from 'protractor';
 
 export class ProductAddedModalPage{
   private buttonCheckoutProductAdded: ElementFinder;
 
   constructor() {
-    this.buttonCheckoutProductAdded = $(
-      '#layer_cart >.clearfix > .layer_cart_cart.col-xs-12.col-md-6 > .button-container > a');
+    this.buttonCheckoutProductAdded = element(by.cssContainingText('span', 'Proceed to checkout'));
   }
   public async goToSummaryPage() : Promise<void> {
     await this.waitToBeClickableButtonCheckout();
