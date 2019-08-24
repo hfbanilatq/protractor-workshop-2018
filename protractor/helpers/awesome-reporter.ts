@@ -1,7 +1,7 @@
 const { AwesomeReport } = require('jasmine-awesome-report');
 
 const config = {
-  fullPath: 'report',
+  fullPath: 'reports',
   fileName: 'awesome',
   merge: true
 };
