@@ -14,5 +14,12 @@ export const config: Config = {
   getPageTimeout: 3000,
   jasmineNodeOpts: {
     defaultTimeoutInterval: 70000
+  },
+  capabilities: {
+    browserName: 'chrome',
+    chromeOptions: {
+      args: ['--disable-popup-blocking', '--no-default-browser-check', '--window-size=800,600'],
+      prefs: { credentials_enable_service: false }
+    }
   }
 };
