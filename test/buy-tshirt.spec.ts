@@ -22,7 +22,7 @@ describe('Buy a t-shirt', async () => {
     describe('T-shit purchase proccess', async () => {
       beforeEach(async () => {
         await menuContentPage.goToTShirtMenu();
-        await productListPage.goToProductAddeModal();
+        await productListPage.selectProduct('Faded Short Sleeve T-shirts');
         await productAddedModalPage.goToSummaryPage();
         await sumaryStepPage.goToSignIn();
       });
