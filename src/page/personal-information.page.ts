@@ -30,27 +30,27 @@ export class PersonalInformationPage {
     this.buttonAcceptCookies = element(by.id('cookie_action_close_header'));
   }
 
-  private getLocatorSexOption(option: string): ElementFinder {
+  private getElementSexOption(option: string): ElementFinder {
     return element(by.css(`[name="sex"][value="${option}"]`));
   }
 
-  private getLocatorExperienceOption (yearExperience: number): ElementFinder {
+  private getElementExperienceOption (yearExperience: number): ElementFinder {
     return element(by.css(`[name="exp"][value="${yearExperience}"]`));
   }
 
-  private getLocatorProfessionOption(profession: string): ElementFinder {
+  private getElementProfessionOption(profession: string): ElementFinder {
     return element(by.css(`[name="profession"][value="${profession}"]`));
   }
 
-  private getLocatorToolsOption(tool: string): ElementFinder {
+  private getElementToolsOption(tool: string): ElementFinder {
     return element(by.css(`[name="tool"][value="${tool}"]`));
   }
 
-  private getLocatorContinentOption(name: string): ElementFinder {
+  private getElementContinentOption(name: string): ElementFinder {
     return this.selectContinent.element(by.cssContainingText('option', name));
   }
 
-  private getLocatorSeleniumCommandOption(command: string) : ElementFinder {
+  private getElementSeleniumCommandOption(command: string) : ElementFinder {
     return this.multiSelectCommands.element(by.cssContainingText('option', command));
   }
 
@@ -58,21 +58,21 @@ export class PersonalInformationPage {
     await this.buttonAcceptCookies.click();
     await this.fieldFirstName.sendKeys(form.firstName);
     await this.fieldLastName.sendKeys(form.lastName);
-    await this.getLocatorSexOption(form.sex).click();
-    await this.getLocatorExperienceOption(form.experience).click();
+    await this.getElementSexOption(form.sex).click();
+    await this.getElementExperienceOption(form.experience).click();
 
     for (const profession of form.profession) {
-      await this.getLocatorProfessionOption(profession).click();
+      await this.getElementProfessionOption(profession).click();
     }
 
     for (const tool of form.tools) {
-      await this.getLocatorToolsOption(tool).click();
+      await this.getElementToolsOption(tool).click();
     }
 
-    await this.getLocatorContinentOption(form.continent).click();
+    await this.getElementContinentOption(form.continent).click();
 
     for (const command of form.commands) {
-      await this.getLocatorSeleniumCommandOption(command).click();
+      await this.getElementSeleniumCommandOption(command).click();
     }
   }
 
