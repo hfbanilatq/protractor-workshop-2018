@@ -1,4 +1,5 @@
-import { element , by, ElementFinder, ElementArrayFinder } from 'protractor';
+import { element , by, ElementFinder } from 'protractor';
+
 interface PersonalInformation{
   firstName: string;
   lastName: string;
@@ -8,15 +9,11 @@ interface PersonalInformation{
   tools: string[];
   continent: string;
   commands: string[];
-
 }
+
 export class PersonalInformationPage {
   private fieldFirstName: ElementFinder;
   private fieldLastName: ElementFinder;
-  private radioSex: ElementArrayFinder;
-  private radioExperience: ElementArrayFinder;
-  private checkBoxProfession: ElementArrayFinder;
-  private checkBoxTools: ElementArrayFinder;
   private selectContinent: ElementFinder;
   private multiSelectCommands: ElementFinder;
   private buttonSend: ElementFinder;
@@ -26,74 +23,64 @@ export class PersonalInformationPage {
   constructor() {
     this.fieldFirstName = element(by.name('firstname'));
     this.fieldLastName = element(by.id('lastname'));
-    this.radioSex = element.all(by.name('sex'));
-    this.radioExperience = element.all(by.name('exp'));
-    this.checkBoxProfession = element.all(by.name('profession'));
-    this.checkBoxTools = element.all(by.name('tool'));
     this.selectContinent = element(by.id('continents'));
     this.multiSelectCommands = element(by.name('selenium_commands'));
     this.buttonSend = element(by.id('submit'));
     this.texPageTittle = element(by.id('content'));
     this.buttonAcceptCookies = element(by.id('cookie_action_close_header'));
   }
-  private sexOption(sex: string): ElementFinder {
-    return this.radioSex
-      .filter((item: ElementFinder) =>
-        item.getAttribute('value')
-          .then((value: string) => value.includes(sex)))
-      .first();
+
+  private getLocatorSexOption(option: string): ElementFinder {
+    return element(by.css(`[name="sex"][value="${option}"]`));
   }
-  private experienceOption (yearExperience: number): ElementFinder {
-    return this.radioExperience
-      .filter((item: ElementFinder) =>
-        item.getAttribute('value')
-          .then((value: string) => value.includes(yearExperience.toString())))
-      .first();
+
+  private getLocatorExperienceOption (yearExperience: number): ElementFinder {
+    return element(by.css(`[name="exp"][value="${yearExperience}"]`));
   }
-  private professionOption(profession: string): ElementFinder {
-    return this.checkBoxProfession.
-      filter((item: ElementFinder) =>
-        item.getAttribute('value')
-          .then((value: string) => value.includes(profession)))
-      .first();
+
+  private getLocatorProfessionOption(profession: string): ElementFinder {
+    return element(by.css(`[name="profession"][value="${profession}"]`));
   }
-  private toolsOption(tools: string): ElementFinder {
-    return this.checkBoxTools
-      .filter((item: ElementFinder) =>
-        item.getAttribute('value')
-          .then((value: string) => value.includes(tools)))
-      .first();
+
+  private getLocatorToolsOption(tool: string): ElementFinder {
+    return element(by.css(`[name="tool"][value="${tool}"]`));
   }
-  private continentSelectOption(name: string): ElementFinder {
+
+  private getLocatorContinentOption(name: string): ElementFinder {
     return this.selectContinent.element(by.cssContainingText('option', name));
   }
-  private seleniumCommandSelectOption(command: string) : ElementFinder {
+
+  private getLocatorSeleniumCommandOption(command: string) : ElementFinder {
     return this.multiSelectCommands.element(by.cssContainingText('option', command));
   }
+
   public async fillForm(form: PersonalInformation): Promise<void> {
     await this.buttonAcceptCookies.click();
     await this.fieldFirstName.sendKeys(form.firstName);
     await this.fieldLastName.sendKeys(form.lastName);
-    await this.sexOption(form.sex).click();
-    await this.experienceOption(form.experience).click();
+    await this.getLocatorSexOption(form.sex).click();
+    await this.getLocatorExperienceOption(form.experience).click();
 
     for (const profession of form.profession) {
-      await this.professionOption(profession).click();
-    }
-    for (const tool of form.tools) {
-      await this.toolsOption(tool).click();
+      await this.getLocatorProfessionOption(profession).click();
     }
 
-    await this.continentSelectOption(form.continent).click();
+    for (const tool of form.tools) {
+      await this.getLocatorToolsOption(tool).click();
+    }
+
+    await this.getLocatorContinentOption(form.continent).click();
 
     for (const command of form.commands) {
-      await this.seleniumCommandSelectOption(command).click();
+      await this.getLocatorSeleniumCommandOption(command).click();
     }
   }
+
   public async submit() : Promise<void> {
     await this.buttonSend.click();
   }
-  public async getPageTitle(): Promise<string> {
+
+  public async getPageTittle(): Promise<string> {
     return this.texPageTittle.element(by.tagName('h1')).getText();
   }
 }
