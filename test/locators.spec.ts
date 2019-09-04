@@ -33,7 +33,7 @@ describe('Open page to practice automation', async () => {
     });
 
     it('Then the form should be filled', async () => {
-      await expect(personalInformationPage.getPageTitle()).toBe('Practice Automation Form');
+      await expect(personalInformationPage.getPageTittle()).toBe('Practice Automation Form');
     });
   });
 });
