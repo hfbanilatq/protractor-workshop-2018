@@ -26,7 +26,7 @@ export class PersonalInformationPage {
     this.selectContinent = element(by.id('continents'));
     this.multiSelectCommands = element(by.name('selenium_commands'));
     this.buttonSend = element(by.id('submit'));
-    this.texPageTittle = element(by.id('content'));
+    this.texPageTittle = element(by.id('content')).element(by.tagName('h1'));
     this.buttonAcceptCookies = element(by.id('cookie_action_close_header'));
   }
 
@@ -81,6 +81,6 @@ export class PersonalInformationPage {
   }
 
   public async getPageTittle(): Promise<string> {
-    return this.texPageTittle.element(by.tagName('h1')).getText();
+    return this.texPageTittle.getText();
   }
 }
