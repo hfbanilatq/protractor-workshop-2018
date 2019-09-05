@@ -1,4 +1,4 @@
-import { element , by, ElementFinder } from 'protractor';
+import { element , by, ElementFinder, browser, ExpectedConditions } from 'protractor';
 
 interface PersonalInformation{
   firstName: string;
@@ -55,6 +55,8 @@ export class PersonalInformationPage {
   }
 
   public async fillForm(form: PersonalInformation): Promise<void> {
+    await browser.wait(
+      ExpectedConditions.elementToBeClickable(this.buttonAcceptCookies), 3000);
     await this.buttonAcceptCookies.click();
     await this.fieldFirstName.sendKeys(form.firstName);
     await this.fieldLastName.sendKeys(form.lastName);
