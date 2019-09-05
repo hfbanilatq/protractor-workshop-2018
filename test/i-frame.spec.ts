@@ -18,9 +18,8 @@ describe('Open page with Iframe ', async () => {
     it('Then the height should be changed', async () => {
       await expect(iFramePage.getFormFrameHeight()).toBe(`${height}`);
     });
-
-    afterAll(async () => {
-      await browser.switchTo().defaultContent();
-    });
+  });
+  afterAll(async () => {
+    await browser.switchTo().defaultContent();
   });
 });
