@@ -17,7 +17,7 @@ export class PersonalInformationPage {
   private selectContinent: ElementFinder;
   private multiSelectCommands: ElementFinder;
   private buttonSend: ElementFinder;
-  private texPageTittle: ElementFinder;
+  private texPageTitle: ElementFinder;
   private buttonAcceptCookies: ElementFinder;
 
   constructor() {
@@ -26,7 +26,7 @@ export class PersonalInformationPage {
     this.selectContinent = element(by.id('continents'));
     this.multiSelectCommands = element(by.name('selenium_commands'));
     this.buttonSend = element(by.id('submit'));
-    this.texPageTittle = element(by.id('content')).element(by.tagName('h1'));
+    this.texPageTitle = element(by.id('content')).element(by.tagName('h1'));
     this.buttonAcceptCookies = element(by.id('cookie_action_close_header'));
   }
 
@@ -80,7 +80,7 @@ export class PersonalInformationPage {
     await this.buttonSend.click();
   }
 
-  public async getPageTittle(): Promise<string> {
-    return this.texPageTittle.getText();
+  public async getPageTitle(): Promise<string> {
+    return this.texPageTitle.getText();
   }
 }
