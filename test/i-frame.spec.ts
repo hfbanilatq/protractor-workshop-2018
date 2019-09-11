@@ -21,6 +21,7 @@ describe('Open page with Iframe ', async () => {
     it('Then the height should be changed', async () => {
       await expect(iFramePage.getFormFrameHeight()).toBe(`${height}`);
     });
+
     describe('Switching to frame', async () => {
 
       beforeAll(async () => {

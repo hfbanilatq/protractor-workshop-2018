@@ -1,6 +1,7 @@
 import { Config, browser } from 'protractor';
 import { reporter } from './helpers/reporter';
 import { awesomeReporter } from './helpers/awesome-reporter';
+
 export const config: Config = {
   framework: 'jasmine',
   specs: ['../test/**/*.spec.js'],

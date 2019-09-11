@@ -1,6 +1,8 @@
-import { element , by, ElementFinder } from 'protractor';
-
-interface PersonalInformation{
+import { element , by, ElementFinder, browser } from 'protractor';
+import { resolve } from 'path';
+import { existsSync } from 'fs';
+import * as remote from 'selenium-webdriver';
+interface IPersonalInformation{
   firstName: string;
   lastName: string;
   sex: string;
@@ -9,6 +11,7 @@ interface PersonalInformation{
   tools: string[];
   continent: string;
   commands: string[];
+  file?: string;
 }
 
 export class PersonalInformationPage {
@@ -19,6 +22,7 @@ export class PersonalInformationPage {
   private buttonSend: ElementFinder;
   private texPageTitle: ElementFinder;
   private buttonAcceptCookies: ElementFinder;
+  private fileInputUploadFile: ElementFinder;
 
   constructor() {
     this.fieldFirstName = element(by.name('firstname'));
@@ -28,6 +32,7 @@ export class PersonalInformationPage {
     this.buttonSend = element(by.id('submit'));
     this.texPageTitle = element(by.id('content')).element(by.tagName('h1'));
     this.buttonAcceptCookies = element(by.id('cookie_action_close_header'));
+    this.fileInputUploadFile = element(by.id('photo'));
   }
 
   private getElementSexOption(option: string): ElementFinder {
@@ -54,7 +59,21 @@ export class PersonalInformationPage {
     return this.multiSelectCommands.element(by.cssContainingText('option', command));
   }
 
-  public async fillForm(form: PersonalInformation): Promise<void> {
+  private async uploadFile(relativePath: string) : Promise<void> {
+    const fullPath = resolve(process.cwd(), relativePath);
+
+    if (existsSync(fullPath)) {
+      await browser.setFileDetector(new remote.FileDetector());
+      await this.fileInputUploadFile.sendKeys(fullPath);
+      await browser.setFileDetector(undefined);
+    }
+  }
+  public async getFileName() : Promise<string> {
+    const fullPath: string = await this.fileInputUploadFile.getAttribute('value');
+    return fullPath.split(/(\\|\/)/g).pop();
+  }
+
+  public async fillForm(form: IPersonalInformation): Promise<void> {
     await this.buttonAcceptCookies.click();
     await this.fieldFirstName.sendKeys(form.firstName);
     await this.fieldLastName.sendKeys(form.lastName);
@@ -64,7 +83,9 @@ export class PersonalInformationPage {
     for (const profession of form.profession) {
       await this.getElementProfessionOption(profession).click();
     }
-
+    if (form.file) {
+      await this.uploadFile(form.file);
+    }
     for (const tool of form.tools) {
       await this.getElementToolsOption(tool).click();
     }
@@ -76,7 +97,8 @@ export class PersonalInformationPage {
     }
   }
 
-  public async submit() : Promise<void> {
+  public async submit(form: IPersonalInformation) : Promise<void> {
+    await this.fillForm(form);
     await this.buttonSend.click();
   }
 
