@@ -1,8 +1,9 @@
 import { element , by, ElementFinder, browser } from 'protractor';
 import { resolve } from 'path';
 import { existsSync } from 'fs';
-import * as remote from 'selenium-webdriver';
-interface IPersonalInformation{
+import * as remote from 'selenium-webdriver/remote';
+
+interface PersonalInformation{
   firstName: string;
   lastName: string;
   sex: string;
@@ -63,17 +64,21 @@ export class PersonalInformationPage {
     const fullPath = resolve(process.cwd(), relativePath);
 
     if (existsSync(fullPath)) {
-      await browser.setFileDetector(new remote.FileDetector());
+      browser.setFileDetector(new remote.FileDetector());
+
       await this.fileInputUploadFile.sendKeys(fullPath);
-      await browser.setFileDetector(undefined);
+
+      browser.setFileDetector(undefined);
     }
   }
+
   public async getFileName() : Promise<string> {
-    const fullPath: string = await this.fileInputUploadFile.getAttribute('value');
-    return fullPath.split(/(\\|\/)/g).pop();
+    const fullUrl: string = await browser.getCurrentUrl();
+
+    return fullUrl.match(/fotoTest\.jpg/g).pop();
   }
 
-  public async fillForm(form: IPersonalInformation): Promise<void> {
+  private async fillForm(form: PersonalInformation): Promise<void> {
     await this.buttonAcceptCookies.click();
     await this.fieldFirstName.sendKeys(form.firstName);
     await this.fieldLastName.sendKeys(form.lastName);
@@ -83,9 +88,11 @@ export class PersonalInformationPage {
     for (const profession of form.profession) {
       await this.getElementProfessionOption(profession).click();
     }
+
     if (form.file) {
       await this.uploadFile(form.file);
     }
+
     for (const tool of form.tools) {
       await this.getElementToolsOption(tool).click();
     }
@@ -97,7 +104,7 @@ export class PersonalInformationPage {
     }
   }
 
-  public async submit(form: IPersonalInformation) : Promise<void> {
+  public async submit(form: PersonalInformation) : Promise<void> {
     await this.fillForm(form);
     await this.buttonSend.click();
   }
