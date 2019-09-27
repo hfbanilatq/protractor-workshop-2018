@@ -6,7 +6,7 @@ export class IFramePage{
 
   constructor() {
     this.iframe1 = $('#IF1');
-    this.labelDocumentTitle = $('#content h1');
+    this.labelDocumentTitle = $('#main h1');
   }
 
   public async setFormFrameHeight(height: number): Promise<void> {
