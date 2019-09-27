@@ -1,9 +1,9 @@
-import { ElementFinder, browser, ElementArrayFinder, element, by } from 'protractor';
+import { ElementFinder, browser, ElementArrayFinder, $$ } from 'protractor';
 
 export class ProductListPage{
   private products: ElementArrayFinder;
   constructor() {
-    this.products = element.all(by.css('.product-container'));
+    this.products = $$('.product-container');
   }
 
   public async selectProduct(productName: string): Promise<void> {
