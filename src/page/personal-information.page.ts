@@ -1,4 +1,4 @@
-import { element , by, ElementFinder, browser } from 'protractor';
+import { element , by, ElementFinder, browser, ExpectedConditions } from 'protractor';
 import { resolve } from 'path';
 import { existsSync } from 'fs';
 import * as remote from 'selenium-webdriver/remote';
@@ -79,6 +79,7 @@ export class PersonalInformationPage {
   }
 
   private async fillForm(form: PersonalInformation): Promise<void> {
+    await browser.wait(ExpectedConditions.elementToBeClickable(this.buttonAcceptCookies), 3000);
     await this.buttonAcceptCookies.click();
     await this.fieldFirstName.sendKeys(form.firstName);
     await this.fieldLastName.sendKeys(form.lastName);

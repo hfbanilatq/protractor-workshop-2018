@@ -23,7 +23,7 @@ describe('Open page with Iframe ', async () => {
     });
 
     describe('Switching to frame', async () => {
-
+      // const personalInformationPage = new PersonalInformationPage;
       beforeAll(async () => {
         await iFramePage.switchToFrame();
       });
