@@ -1,4 +1,7 @@
-import { element , by, ElementFinder } from 'protractor';
+import { element , by, ElementFinder, browser, ExpectedConditions } from 'protractor';
+import { resolve } from 'path';
+import { existsSync } from 'fs';
+import * as remote from 'selenium-webdriver/remote';
 
 interface PersonalInformation{
   firstName: string;
@@ -9,6 +12,7 @@ interface PersonalInformation{
   tools: string[];
   continent: string;
   commands: string[];
+  file?: string;
 }
 
 export class PersonalInformationPage {
@@ -19,6 +23,7 @@ export class PersonalInformationPage {
   private buttonSend: ElementFinder;
   private texPageTitle: ElementFinder;
   private buttonAcceptCookies: ElementFinder;
+  private fileInputUploadFile: ElementFinder;
 
   constructor() {
     this.fieldFirstName = element(by.name('firstname'));
@@ -28,6 +33,7 @@ export class PersonalInformationPage {
     this.buttonSend = element(by.id('submit'));
     this.texPageTitle = element(by.id('content')).element(by.tagName('h1'));
     this.buttonAcceptCookies = element(by.id('cookie_action_close_header'));
+    this.fileInputUploadFile = element(by.id('photo'));
   }
 
   private getElementSexOption(option: string): ElementFinder {
@@ -54,7 +60,26 @@ export class PersonalInformationPage {
     return this.multiSelectCommands.element(by.cssContainingText('option', command));
   }
 
-  public async fillForm(form: PersonalInformation): Promise<void> {
+  private async uploadFile(relativePath: string) : Promise<void> {
+    const fullPath = resolve(process.cwd(), relativePath);
+
+    if (existsSync(fullPath)) {
+      browser.setFileDetector(new remote.FileDetector());
+
+      await this.fileInputUploadFile.sendKeys(fullPath);
+
+      browser.setFileDetector(undefined);
+    }
+  }
+
+  public async getFileName() : Promise<string> {
+    const fullUrl: string = await browser.getCurrentUrl();
+
+    return fullUrl.match(/fotoTest\.jpg/g).pop();
+  }
+
+  private async fillForm(form: PersonalInformation): Promise<void> {
+    await browser.wait(ExpectedConditions.elementToBeClickable(this.buttonAcceptCookies), 3000);
     await this.buttonAcceptCookies.click();
     await this.fieldFirstName.sendKeys(form.firstName);
     await this.fieldLastName.sendKeys(form.lastName);
@@ -63,6 +88,10 @@ export class PersonalInformationPage {
 
     for (const profession of form.profession) {
       await this.getElementProfessionOption(profession).click();
+    }
+
+    if (form.file) {
+      await this.uploadFile(form.file);
     }
 
     for (const tool of form.tools) {
@@ -76,7 +105,8 @@ export class PersonalInformationPage {
     }
   }
 
-  public async submit() : Promise<void> {
+  public async submit(form: PersonalInformation) : Promise<void> {
+    await this.fillForm(form);
     await this.buttonSend.click();
   }
 

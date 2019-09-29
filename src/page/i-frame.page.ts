@@ -1,4 +1,4 @@
-import { $, browser, ElementFinder } from 'protractor';
+import { $, browser, ElementFinder, ExpectedConditions } from 'protractor';
 
 export class IFramePage{
   private iframe1: ElementFinder;
@@ -26,6 +26,7 @@ export class IFramePage{
   }
 
   public async getPageTitle() : Promise<string> {
+    await browser.wait(ExpectedConditions.presenceOf(this.labelDocumentTitle), 3000);
     return await this.labelDocumentTitle.getText();
   }
 
