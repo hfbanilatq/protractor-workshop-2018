@@ -2,6 +2,7 @@ import { element , by, ElementFinder, browser, ExpectedConditions } from 'protra
 import { resolve } from 'path';
 import { existsSync } from 'fs';
 import * as remote from 'selenium-webdriver/remote';
+import { DownloadService } from '../sercive';
 
 interface PersonalInformation{
   firstName: string;
@@ -13,6 +14,7 @@ interface PersonalInformation{
   continent: string;
   commands: string[];
   file?: string;
+  downloadFile?: boolean;
 }
 
 export class PersonalInformationPage {
@@ -24,6 +26,7 @@ export class PersonalInformationPage {
   private texPageTitle: ElementFinder;
   private buttonAcceptCookies: ElementFinder;
   private fileInputUploadFile: ElementFinder;
+  private fileDownLoadLink: ElementFinder;
 
   constructor() {
     this.fieldFirstName = element(by.name('firstname'));
@@ -34,6 +37,7 @@ export class PersonalInformationPage {
     this.texPageTitle = element(by.id('content')).element(by.tagName('h1'));
     this.buttonAcceptCookies = element(by.id('cookie_action_close_header'));
     this.fileInputUploadFile = element(by.id('photo'));
+    this.fileDownLoadLink = element(by.linkText('Test File to Download'));
   }
 
   private getElementSexOption(option: string): ElementFinder {
@@ -78,6 +82,13 @@ export class PersonalInformationPage {
     return fullUrl.match(/fotoTest\.jpg/g).pop();
   }
 
+  public async download(): Promise<void> {
+    const downloadLink = await this.fileDownLoadLink.getAttribute('href');
+    const downloadService = new DownloadService;
+
+    await downloadService.downloadFile(downloadLink, 'Test-File-to-Download.xlsx');
+  }
+
   private async fillForm(form: PersonalInformation): Promise<void> {
     await browser.wait(ExpectedConditions.elementToBeClickable(this.buttonAcceptCookies), 3000);
     await this.buttonAcceptCookies.click();
@@ -92,6 +103,10 @@ export class PersonalInformationPage {
 
     if (form.file) {
       await this.uploadFile(form.file);
+    }
+
+    if (form.downloadFile) {
+      await this.download();
     }
 
     for (const tool of form.tools) {

@@ -1,5 +1,6 @@
 import { browser } from 'protractor';
 import { PersonalInformationPage } from '../src/page';
+import { DownloadService } from '../src/sercive';
 
 describe('Open page to practice automation', async () => {
 
@@ -20,6 +21,7 @@ describe('Open page to practice automation', async () => {
         experience: 7,
         profession: ['Automation Tester'],
         file: './resources/fotoTest.jpg',
+        downloadFile: true,
         tools: ['Selenium Webdriver'],
         continent: 'South America',
         commands: [
@@ -38,6 +40,13 @@ describe('Open page to practice automation', async () => {
 
     it('Then the file should be loaded', async () => {
       await expect(personalInformationPage.getFileName()).toBe('fotoTest.jpg');
+    });
+
+    it('The should be created a file in temp folder', () => {
+      const service = new DownloadService();
+      const file = service.readFileFromTtemp('Test-File-to-Download.xlsx');
+
+      expect(file.length).toEqual(8764);
     });
   });
 });
