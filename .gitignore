@@ -131,4 +131,6 @@ $RECYCLE.BIN/
 dist
 # Jasmine Awesome report
 reports
+# Downloaded Temp files 
+temp
 # End of https://www.gitignore.io/api/node,windows,visualstudiocode
