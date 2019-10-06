@@ -84,7 +84,7 @@ export class PersonalInformationPage {
 
   public async download(): Promise<void> {
     const downloadLink = await this.fileDownLoadLink.getAttribute('href');
-    const downloadService = new DownloadService;
+    const downloadService = new DownloadService();
 
     await downloadService.downloadFile(downloadLink, 'Test-File-to-Download.xlsx');
   }
